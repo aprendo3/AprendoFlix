@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -312,7 +313,11 @@ public class Main {
         System.out.println("Enter the new release date (or press enter to keep release date):");
         String newReleaseDate = scanner.nextLine();
         if (!newReleaseDate.isEmpty()) {
-            movie.releaseDate = LocalDate.parse(newReleaseDate);
+            try {
+                movie.releaseDate = LocalDate.parse(newReleaseDate);
+            } catch (Exception e) {
+                System.out.printf("`%s` is not valid date %n", newReleaseDate);
+            }
         }
         
         System.out.println("Enter the new genre (or press enter to keep genre):");
@@ -361,9 +366,20 @@ public class Main {
         System.out.print("Enter director: ");
         String director = scanner.nextLine();
         
-        System.out.print("Enter release date (yyyy-mm-dd): ");
-        LocalDate releaseDate = LocalDate.parse(scanner.nextLine());
         
+        LocalDate releaseDate = LocalDate.MIN;
+
+        while(true) {
+            System.out.print("Enter release date (yyyy-mm-dd): ");
+            String inputDate = scanner.nextLine();
+            try {
+                releaseDate = LocalDate.parse(inputDate);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.printf("`%s` is not valid date, (%s) %n", inputDate, e.getMessage());
+            }
+        }
+
         System.out.print("Enter genre: ");
         String genre = scanner.nextLine();
         
