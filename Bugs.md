@@ -13,9 +13,9 @@ Exception in thread "main" java.time.format.DateTimeParseException: Text '' coul
 
 [X] 3) se pueden registrar usuarios con campos vacios para username y password
 
-[ ] 4) agregar peliculas con los campos vacios no debe ser permitido
+[x] 4) agregar peliculas con los campos vacios no debe ser permitido
 
-[ ] 5) se puede agregar Peliculas con la misma informacion, duplicados
+[x] 5) se puede agregar Peliculas con la misma informacion, duplicados
  
 [ ] 6) Un usuario puede votar (Rating) varias veces por la misma pelicula
  

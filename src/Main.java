@@ -359,29 +359,41 @@ public class Main {
 
     private static void addMovie() {
         System.out.printf("%sMovie App%s > %sAdd Movie%s\n", BLUE, RED, BLUE, RESET);
+        String inputData = "";
+        while(true) {
+            System.out.print("\nEnter title: ");
+            inputData = scanner.nextLine();
+            if (!inputData.isBlank()) break;
+        }
+        String title = inputData;
         
-        System.out.print("\nEnter title: ");
-        String title = scanner.nextLine();
+        while(true) {
+            System.out.print("Enter director: ");
+            inputData = scanner.nextLine();
+            if (!inputData.isBlank()) break;
+        }
         
-        System.out.print("Enter director: ");
-        String director = scanner.nextLine();
-        
+        String director = inputData;
         
         LocalDate releaseDate = LocalDate.MIN;
 
         while(true) {
             System.out.print("Enter release date (yyyy-mm-dd): ");
-            String inputDate = scanner.nextLine();
+            inputData = scanner.nextLine();
             try {
-                releaseDate = LocalDate.parse(inputDate);
+                releaseDate = LocalDate.parse(inputData);
                 break;
             } catch (DateTimeParseException e) {
-                System.out.printf("`%s` is not valid date, (%s) %n", inputDate, e.getMessage());
+                System.out.printf("`%s` is not valid date, (%s) %n", inputData, e.getMessage());
             }
         }
 
-        System.out.print("Enter genre: ");
-        String genre = scanner.nextLine();
+        while(true) {
+            System.out.print("Enter genre: ");
+            inputData = scanner.nextLine();
+            if (!inputData.isBlank()) break;
+        }
+        String genre = inputData;
         
         Movie movie = new Movie(title, director, releaseDate, genre);
         movies.add(movie);
