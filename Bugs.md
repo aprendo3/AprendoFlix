@@ -1,4 +1,4 @@
-[ ] 1) al registrar peliculas con el campo "release date" ingresando un dato vacio se tiene:
+[x] 1) al registrar peliculas con el campo "release date" ingresando un dato vacio se tiene:
 Exception in thread "main" java.time.format.DateTimeParseException: Text '' could not be parsed at index 0
         at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
         at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2010)

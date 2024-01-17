@@ -489,7 +489,7 @@ public class Main {
     
     private static boolean addNewLogin(String username, String password) {
         for (int i = 0; i < logins.size(); i+=2) {
-            if (logins.get(i).equals(username)) return false;
+            if (logins.get(i).equalsIgnoreCase(username)) return false;
         }
         logins.add(username);
         logins.add(password);
