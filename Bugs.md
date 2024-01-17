@@ -21,6 +21,6 @@ Exception in thread "main" java.time.format.DateTimeParseException: Text '' coul
  
 [x] 7) La busqueda de peliculas parece no estar completa, solo lista las peliculas de las que se pueden seleccionar alguna para verla.
 
-[ ] 8) Registrar peliculas con mucha informacion o campos muy largos puede deformar la aplaicion al momento de mostrarlos
+[x] 8) Registrar peliculas con mucha informacion o campos muy largos puede deformar la aplaicion al momento de mostrarlos
 
 [x] 9) el resultado de la busqueda de peliculas da numeros incompletos (filtrados)

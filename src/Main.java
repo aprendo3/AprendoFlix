@@ -27,6 +27,7 @@ public class Main {
     static ArrayList<Movie> movies = null;
     static final String ADMIN_LOGIN = "admin";
     static final String MOVIES_FILENAME = "movies.data";
+    static final int LONGITUD_MAXIMA = 20;
 
     public static void main(String[] args) {
         loadLogins();
@@ -100,7 +101,7 @@ public class Main {
         movie.viewCount++;
         while(!quit ) {
             cleanScreen();
-            System.out.printf("%sAprendo Flix %s>%s Watching:%s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title, RESET);
+            System.out.printf("%sAprendo Flix %s>%s Watching:%s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)), RESET);
             showMovieDetails(movie);
             System.out.println();
             System.out.printf("[%s1%s] Rating\n", GREEN, RESET);
@@ -129,7 +130,7 @@ public class Main {
 
     private static void viewComments(Movie movie) {
         cleanScreen();
-        System.out.printf("%sAprendo Flix %s>%s View comment: %s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title, RESET);
+        System.out.printf("%sAprendo Flix %s>%s View comment: %s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)), RESET);
         movie.comments.forEach(System.out::println);
         System.out.println();
         System.out.printf("Please enter new %scomment%s (blank to skip): ", BLUE, RESET);
@@ -140,7 +141,7 @@ public class Main {
 
     private static void addRating(Movie movie) {
         cleanScreen();
-        System.out.printf("%sAprendo Flix %s>%s Rating: %s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title, RESET);
+        System.out.printf("%sAprendo Flix %s>%s Rating: %s%s%s\n", BLUE, RED, BLUE, GREEN, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)), RESET);
         while(true) {
             System.out.println("Rating value from 1 to 5, movie rating");
             System.out.printf("[%sQ%s] Quit\n", RED, RESET);
@@ -208,7 +209,7 @@ public class Main {
         for (int i = 0; i < movies.size(); i++) {
             if (movies.get(i).title.toLowerCase().contains(searchTerm.toLowerCase())) {
                 foundMovies.put(i, movies.get(i));
-                System.out.printf("%d) %s (%s)%n", foundMovies.size(), movies.get(i).title, movies.get(i).releaseDate);
+                System.out.printf("%d) %s (%s)%n", foundMovies.size(), movies.get(i).title.substring(0, Math.min(movies.get(i).title.length(), LONGITUD_MAXIMA)), movies.get(i).releaseDate);
             }
         }
         if (foundMovies.size() == 0) {
@@ -258,7 +259,7 @@ public class Main {
     private static void listMovies() {
         for (int i = 1; i <= movies.size() && i <= 10 ; i++) {
             Movie movie = movies.get(i - 1);
-            System.out.printf("%d) %s, %s\n", i, movie.title, movie.releaseDate);
+            System.out.printf("%d) %s, %s\n", i, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)), movie.releaseDate);
         }
     }
 
@@ -267,7 +268,7 @@ public class Main {
         while (!quit) {
             cleanScreen();
             Movie movie = movies.get(indexMovie);
-            System.out.printf("%sMovie App%s > %s%s (Details)%s\n", BLUE, RED, BLUE, movie.title,RESET);
+            System.out.printf("%sMovie App%s > %s%s (Details)%s\n", BLUE, RED, BLUE, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)),RESET);
             showMovieDetails(movie);
             System.out.println();
             System.out.printf("[%sE%s] Edit a movie\n", GREEN, RESET);
@@ -302,7 +303,7 @@ public class Main {
     private static void editMovie(int indexMovie) {
         cleanScreen();
         Movie movie = movies.get(indexMovie);
-        System.out.printf("%sMovie App%s > %s%s (Editing)%s\n", BLUE, RED, BLUE, movie.title,RESET);
+        System.out.printf("%sMovie App%s > %s%s (Editing)%s\n", BLUE, RED, BLUE, movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)),RESET);
         showMovieDetails(movie);
         System.out.println("Enter the new title (or press enter to keep existing title):");
         String newTitle = scanner.nextLine();
@@ -334,10 +335,10 @@ public class Main {
     }
 
     private static void showMovieDetails(Movie movie) {
-        System.out.printf("Title: %s\n", movie.title);
-        System.out.printf("Director: %s\n", movie.director);
+        System.out.printf("Title: %s\n", movie.title.substring(0, Math.min(movie.title.length(), LONGITUD_MAXIMA)));
+        System.out.printf("Director: %s\n", movie.director.substring(0, Math.min(movie.director.length(), LONGITUD_MAXIMA)));
         System.out.printf("Release Date: %s\n", movie.releaseDate);
-        System.out.printf("Genre: %s\n", movie.genre);
+        System.out.printf("Genre: %s\n", movie.genre.substring(0, Math.min(movie.genre.length(), LONGITUD_MAXIMA)));
         String movieStats = getMovieStats(movie);
         System.out.printf("Stats: %s\n", movieStats);
         
