@@ -146,7 +146,7 @@ public class Main {
             if ("q".equals(choice))
                 break;
             else if (rating != null && rating > 0 && rating <= 5) { 
-                movie.rating.add(rating);
+                movie.rating.put(currentUsername, rating);
                 break;
             }
             else System.out.println("Invalid choice. Please try again.");
@@ -340,7 +340,7 @@ public class Main {
     private static String getMovieStats(Movie movie) {
         var views = String.format("%d views", movie.viewCount);
         var comment = String.format("%d comments", movie.comments.size());
-        double ratingValue = movie.rating.stream().mapToInt(r -> r).average().orElse(0);
+        double ratingValue = movie.rating.values().stream().mapToInt(r -> r).average().orElse(0);
         var rating = String.format("%.1f/5 (%d)", ratingValue , movie.rating.size());
         return String.format("%s[%s, %s, %s]%s", GREEN, views, rating, comment, RESET);
     }

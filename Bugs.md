@@ -17,7 +17,7 @@ Exception in thread "main" java.time.format.DateTimeParseException: Text '' coul
 
 [x] 5) se puede agregar Peliculas con la misma informacion, duplicados
  
-[ ] 6) Un usuario puede votar (Rating) varias veces por la misma pelicula
+[x] 6) Un usuario puede votar (Rating) varias veces por la misma pelicula
  
 [ ] 7) La busqueda de peliculas parece no estar completa, solo lista las peliculas de las que se pueden seleccionar alguna para verla.
 
