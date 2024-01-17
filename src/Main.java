@@ -9,7 +9,10 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Main {
     static final String GREEN = "\033[32m";
@@ -72,6 +75,7 @@ public class Main {
         while (!quit) {
             listMovies();
             System.out.println("Pick a Movie (number) to start watching");
+            System.out.printf("[%sS%s] Search for a movie\n", GREEN, RESET);
             System.out.printf("[%sQ%s] Quit\n", RED, RESET);
             System.out.println();
             System.out.printf("Please select an %soption%s: ", BLUE, RESET);
@@ -79,6 +83,8 @@ public class Main {
             Integer numberMovie = tryToParse(choice);
             if ("q".equals(choice))
                 break;
+            else if ("s".equals(choice))
+                searchMovies(Main::watchMovie);
             else if (numberMovie != null && numberMovie > 0 && numberMovie <= movies.size()) {
                 watchMovie(numberMovie - 1);
                 cleanScreen();
@@ -180,7 +186,7 @@ public class Main {
                 cleanScreen();
                 break;
             case "s":
-                searchMovies();
+                searchMovies(Main::showAdminMenuMoviewDetails);
                 break;
             case "q":
                 running = false;
@@ -192,17 +198,17 @@ public class Main {
         }
     }
 
-    private static void searchMovies() {
+    private static void searchMovies(Consumer<Integer> showDetails) {
         cleanScreen();
         System.out.printf("%sMovie App%s > %s Search Movie%s%n%n", BLUE, RED, BLUE,RESET);
         System.out.print("Enter search term (Title): ");
         String searchTerm = scanner.nextLine();
         System.out.printf("Results with %s%s%s:(Title)%n", GREEN, searchTerm, RESET);
-        ArrayList<Movie> foundMovies = new ArrayList<Movie>();
+        Map<Integer, Movie> foundMovies = new HashMap<Integer, Movie>();
         for (int i = 0; i < movies.size(); i++) {
             if (movies.get(i).title.toLowerCase().contains(searchTerm.toLowerCase())) {
-                System.out.printf("%d) %s (%s)%n", i + 1, movies.get(i).title, movies.get(i).releaseDate);
-                foundMovies.add(movies.get(i));
+                foundMovies.put(i, movies.get(i));
+                System.out.printf("%d) %s (%s)%n", foundMovies.size(), movies.get(i).title, movies.get(i).releaseDate);
             }
         }
         if (foundMovies.size() == 0) {
@@ -221,7 +227,7 @@ public class Main {
         }
         
         if (numberMovie != null && numberMovie > 0 && numberMovie <= foundMovies.size()) {
-            showAdminMenuMoviewDetails(numberMovie - 1);
+            showDetails.accept((int)foundMovies.keySet().toArray()[numberMovie - 1]);
             cleanScreen();
         }
         System.out.println();
@@ -250,7 +256,7 @@ public class Main {
     }
 
     private static void listMovies() {
-        for (int i = 1; i <= movies.size(); i++) {
+        for (int i = 1; i <= movies.size() && i <= 10 ; i++) {
             Movie movie = movies.get(i - 1);
             System.out.printf("%d) %s, %s\n", i, movie.title, movie.releaseDate);
         }
