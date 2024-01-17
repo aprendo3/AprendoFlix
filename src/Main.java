@@ -481,6 +481,13 @@ public class Main {
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
         
+        if(username == null || username.trim().isBlank() 
+            || password == null || password.trim().isBlank()) {
+            System.out.println("Registration Failed! username or password not be empty");
+            
+            return;
+        }
+
         if (addNewLogin(username, password))
             System.out.println("Registration successful! Please login.");
         else

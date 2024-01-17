@@ -9,9 +9,9 @@ Exception in thread "main" java.time.format.DateTimeParseException: Text '' coul
         at Main.main(Main.java:33)
  Terminando inmediatamente con la applicacion.
 
-[ ] 2) Los usuarios pueden registrase con el mismo nombre varias veces si son diferentes letras mayusculas y minisculas
+[x] 2) Los usuarios pueden registrase con el mismo nombre varias veces si son diferentes letras mayusculas y minisculas
 
-[ ] 3) se pueden registrar usuarios con campos vacios para username y password
+[X] 3) se pueden registrar usuarios con campos vacios para username y password
 
 [ ] 4) agregar peliculas con los campos vacios no debe ser permitido
 
